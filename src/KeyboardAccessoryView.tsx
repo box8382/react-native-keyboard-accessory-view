@@ -15,6 +15,7 @@ interface Props {
   spaceBetweenKeyboardAndAccessoryView?: number
   style?: StyleProp<ViewStyle>
   useListenersOnAndroid?: boolean
+  bottom: number
 }
 
 export const KeyboardAccessoryView = React.memo(
@@ -29,12 +30,13 @@ export const KeyboardAccessoryView = React.memo(
     spaceBetweenKeyboardAndAccessoryView,
     style,
     useListenersOnAndroid,
+    bottom,
   }: Props) => {
     const { keyboardEndPositionY, keyboardHeight } = useKeyboardDimensions(
       useListenersOnAndroid
     )
     const { onLayout, size } = useComponentSize()
-    const { bottom, left, right } = useSafeAreaInsets()
+    const { left, right } = useSafeAreaInsets()
     const deltaY = Animated.subtract(
       panResponderPositionY ?? new Animated.Value(0),
       keyboardEndPositionY
